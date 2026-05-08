@@ -5,7 +5,6 @@ metadata:
   labels:
     app: {{ .Values.component }}
 spec:
-  # modify replicas according to your case
   replicas: {{ .Values.replica }}
   selector:
     matchLabels:
@@ -31,14 +30,19 @@ spec:
           env:
             - name: PARAMS
               value: {{ .Values.PARAMS }}
-
       containers:
         - name: {{ .Values.component }}
-          image:  {{ .Values.containers.main.image }}
+          image: {{ .Values.containers.main.image }}
           imagePullPolicy: {{ .Values.containers.main.imagePullPolicy }}
           volumeMounts:
             {{- toYaml .Values.volumeMounts | nindent 12 }}
-
       volumes:
         - name: parameters
           emptyDir: {}
+
+
+
+
+
+
+
